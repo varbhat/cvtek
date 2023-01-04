@@ -1,0 +1,227 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{% raw %}
+%\documentclass[letterpaper,11pt]{article}
+\documentclass[11pt, a4paper]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{multicol}
+\usepackage{hyperref}  
+\usepackage{xcolor}
+\input{glyphtounicode}
+
+
+\usepackage[sfdefault]{inter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.0in}
+%\setlength{\footskip}{4.08003pt}
+%
+
+\urlstyle{same}
+
+
+\definecolor{dark-blue}{rgb}{0.15,0.15,0.4}
+\hypersetup{colorlinks,linkcolor={dark-blue},citecolor={dark-blue},urlcolor={dark-blue}}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Formatting of Sections
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generated PDF file is machine readable or parsable by ATC
+\pdfgentounicode=1
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMMANDS %%%%%%%%%%%%%%%%%%%
+\newcommand{\ResumeHeader}[6]{
+\hspace*{\fill} 
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+ #1 & #2 \\
+ #3 & #4 \\
+ #5 & #6 \\
+\end{tabular*}
+}
+
+
+\newcommand{\FieldEntry}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+
+\newcommand{\ProjectEntry}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{ #1 }{ #2 }\vspace{-4pt}}
+\newcommand{\resumeItem}[2]{
+  \item\small{
+    \textbf{#1}{: #2 \vspace{-2pt}}
+  }
+}
+
+
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+
+\newcommand{\bulletItemListStart}{\begin{itemize}[leftmargin=2mm]}
+\newcommand{\bulletItemListEnd}{\end{itemize}}
+\newcommand{\bulletItem}[1]{
+  \item[$\diamond$]\small{
+    {#1}
+  }
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+{% endraw %}
+
+
+{% if cvstruct.header %}
+{% raw %}
+\ResumeHeader
+{\textbf{\href{https://github.com/{% endraw %}{{cvstruct.header.github_username}}{% raw %}}{\Large\color{black}{{% endraw %}{{ cvstruct.header.full_name }}{% raw %}}}}}
+{\href{mailto:{% endraw %}{{ cvstruct.header.email_addr }}{% raw %}}{{% endraw %}{{ cvstruct.header.email_addr }}{% raw %}}}
+{\href{https://github.com/{% endraw %}{{ cvstruct.header.github_username}}{% raw %}}{github.com/{% endraw %}{{ cvstruct.header.github_username}}{% raw %}}} 
+{\href{https://linkedin.com/in/{% endraw %}{{ cvstruct.header.linkedin_username }}{% raw %}}{linkedin.com/in/{% endraw %}{{ cvstruct.header.linkedin_username }}{% raw %}}} 
+{{{% endraw %}{{ cvstruct.header.location }}{% raw %}}}
+{\href{tel:{% endraw %}{{ cvstruct.header.phone_number }}{% raw %}}{{% endraw %}{{ cvstruct.header.phone_number }}{% raw %}}}
+{% endraw %}
+{% endif %}
+
+
+{% if cvstruct.education %}
+\section{Education}
+{% for education in cvstruct.education %}
+\resumeSubHeadingListStart
+\FieldEntry
+{% raw %}{{% endraw %}{{ education.course_name }}{% raw %}}{% endraw %}
+{% raw %}{{% endraw %}{{ education.timeline }}{% raw %}}{% endraw %}
+{% raw %}{\href{{% endraw %}{{education.university_link}}{% raw %}}{{% endraw %}{{education.university_name}}{% raw %}}; Grade: {% endraw %}{{education.course_grade}}{% raw %}}{% endraw %}
+{% raw %}{{% endraw %}{{ education.location }}{% raw %}}{% endraw %}
+
+
+{% if education.points %}
+\bulletItemListStart
+{% for eachpoint in education.points %}
+{% raw %}\bulletItem{{% endraw %}{{ eachpoint }}{% raw %}}{% endraw %}
+{% endfor %}
+\bulletItemListEnd
+{% endif %}
+
+\resumeSubHeadingListEnd
+{% endfor %}
+
+\setlength{\columnsep}{0.5cm}
+{% endif %}
+
+
+
+
+
+
+{% if cvstruct.experience %}
+\section{Experience}
+
+{% for experience in cvstruct.experience %}
+\resumeSubHeadingListStart
+\FieldEntry
+{% raw %}{{% endraw %}{{ experience.comp_name }}{% raw %}}{% endraw %}
+{% raw %}{{% endraw %}{{ experience.timeline }}{% raw %}}{% endraw %}
+{% raw %}{{% endraw %}{{ experience.exp_name }}{% raw %}}{% endraw %}
+{% raw %}{{% endraw %}{{ experience.location }}{% raw %}}{% endraw %}
+
+{% if experience.points %}
+\bulletItemListStart
+{% for eachpoint in experience.points %}
+{% raw %}\bulletItem{{% endraw %}{{ eachpoint }}{% raw %}}{% endraw %}
+{% endfor %}
+\bulletItemListEnd
+{% endif %}
+
+\resumeSubHeadingListEnd
+{% endfor %}
+\setlength{\columnsep}{0.5cm}
+{% endif %}
+
+
+
+{% if cvstruct.projects %}
+\section{Projects}
+{% for project in cvstruct.projects %}
+\resumeSubHeadingListStart
+\resumeProjectHeading
+{% raw %}{\textbf{\href{{% endraw %}{{ project.project_link }}{% raw %}}{{% endraw %}{{ project.title }}{% raw %}}} $|$ \emph{{% endraw %}{{ project.description }}{% raw %}}}{}{% endraw %}
+{% if project.points %}
+\bulletItemListStart
+{% for eachpoint in project.points %}
+{% raw %}\bulletItem{{% endraw %}{{ eachpoint }}{% raw %}}{% endraw %}
+{% endfor %}
+\bulletItemListEnd
+{% endif %}
+\resumeSubHeadingListEnd
+{% endfor %}
+\setlength{\columnsep}{0.5cm}
+{% endif %}
+
+
+{% if cvstruct.skills %}
+\section{Technical Skills}
+\resumeSubHeadingListStart
+  {% for k,v in cvstruct.skills %}
+  {% raw %}\resumeSubItem{{% endraw %}{{k}}{% raw %}}{{% endraw %}{{v}}{% raw %}}{% endraw %}
+  {% endfor %}
+\resumeSubHeadingListEnd
+{% endif %}
+
+
+\end{document}

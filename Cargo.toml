@@ -1,0 +1,15 @@
+[package]
+name = "cvtek"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.68"
+clap = { version = "4.0.29", features = ["derive"] }
+once_cell = "1.17.0"
+ron = "0.8.0"
+serde = { version = "1.0.151", features = ["derive"] }
+tera = "1.17.1"
+toml = "0.5.10"
