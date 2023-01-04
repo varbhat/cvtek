@@ -8,8 +8,9 @@ edition = "2021"
 [dependencies]
 anyhow = "1.0.68"
 clap = { version = "4.0.29", features = ["derive"] }
+indexmap = { version = "1.9.2", features = ["serde"] }
 once_cell = "1.17.0"
 ron = "0.8.0"
 serde = { version = "1.0.151", features = ["derive"] }
 tera = "1.17.1"
-toml = "0.5.10"
+toml = { version = "0.5.10", features = ["preserve_order"]}

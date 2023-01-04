@@ -175,7 +175,7 @@
 {% for experience in cvstruct.experience %}
 \resumeSubHeadingListStart
 \FieldEntry
-{% raw %}{{% endraw %}{{ experience.comp_name }}{% raw %}}{% endraw %}
+{% raw %}{\href{{% endraw %}{{ experience.comp_link}}{% raw %}}{{% endraw %}{{ experience.comp_name }}{% raw %}}{% endraw %}}
 {% raw %}{{% endraw %}{{ experience.timeline }}{% raw %}}{% endraw %}
 {% raw %}{{% endraw %}{{ experience.exp_name }}{% raw %}}{% endraw %}
 {% raw %}{{% endraw %}{{ experience.location }}{% raw %}}{% endraw %}

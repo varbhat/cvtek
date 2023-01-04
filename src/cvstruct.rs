@@ -1,8 +1,6 @@
-use std::{
-    collections::HashMap,
-    fs,
-    path::Path,
-};
+use std::{fs, path::Path};
+
+use indexmap::IndexMap;
 
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
@@ -29,14 +27,14 @@ pub struct CVStruct {
     pub education: Option<Vec<EducationField>>,
     pub experience: Option<Vec<ExperienceField>>,
     pub projects: Option<Vec<ProjectField>>,
-    pub skills: Option<HashMap<String, String>>,
+    pub skills: Option<IndexMap<String, String>>,
 }
 
 pub enum OutputType {
     Tex,
     HTML,
     Markdown,
-    TOML
+    TOML,
 }
 
 impl CVStruct {
@@ -85,7 +83,7 @@ impl CVStruct {
                     "I created this to prove myself".to_string(),
                 ]),
             }]),
-            skills: Some(HashMap::from([
+            skills: Some(IndexMap::from([
                 (
                     "Technologies".to_string(),
                     "A, B, C, D, E, F, G, H, whatever".to_string(),
