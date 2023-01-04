@@ -12,5 +12,5 @@ indexmap = { version = "1.9.2", features = ["serde"] }
 once_cell = "1.17.0"
 ron = "0.8.0"
 serde = { version = "1.0.151", features = ["derive"] }
-tera = "1.17.1"
+tera = { version="1.17.1", features = ["preserve_order"]}
 toml = { version = "0.5.10", features = ["preserve_order"]}
