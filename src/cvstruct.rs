@@ -3,22 +3,28 @@ use std::{fs, path::Path};
 use indexmap::IndexMap;
 
 use anyhow::Result;
+use rust_embed::RustEmbed;
 use serde::{Deserialize, Serialize};
 
-use once_cell::sync::Lazy;
 use tera::Context;
 use tera::Tera;
+use once_cell::sync::Lazy;
+
+#[derive(RustEmbed)]
+#[folder = "templates/"]
+struct Asset;
 
 static TEMPLATES: Lazy<Tera> = Lazy::new(|| {
-    let tera = match Tera::new("templates/*") {
-        Ok(t) => t,
-        Err(e) => {
-            println!("Parsing error(s): {}", e);
-            ::std::process::exit(1);
+    let mut tera = Tera::default();
+    let template_list = ["resume.tex.tmpl","resume.md.tmpl"];
+    for each_temp in template_list {
+        if let Some(content) = Asset::get(each_temp) {
+            tera.add_raw_template(each_temp, std::str::from_utf8(content.data.as_ref()).expect("Internal Error (See templates)")).expect("Tera error adding templates");
         }
-    };
+    }
     tera
 });
+
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct CVStruct {
@@ -110,21 +116,22 @@ impl CVStruct {
     pub fn to_tex(&self) -> Result<String> {
         let mut context = Context::new();
         context.insert("cvstruct", &self);
-        let resume_tex = TEMPLATES.render("resume.tex", &context)?;
+
+        let resume_tex = TEMPLATES.render("resume.tex.tmpl", &context)?;
         Ok(resume_tex)
     }
 
     pub fn to_md(&self) -> Result<String> {
         let mut context = Context::new();
         context.insert("cvstruct", &self);
-        let resume_md = TEMPLATES.render("resume.md", &context)?;
+        let resume_md = TEMPLATES.render("resume.md.tmpl", &context)?;
         Ok(resume_md)
     }
 
     pub fn to_html(&self) -> Result<String> {
         let mut context = Context::new();
         context.insert("cvstruct", &self);
-        let resume_html = TEMPLATES.render("resume.html", &context)?;
+        let resume_html = TEMPLATES.render("resume.html.tmpl", &context)?;
         Ok(resume_html)
     }
 }
