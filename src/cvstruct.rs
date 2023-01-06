@@ -6,9 +6,9 @@ use anyhow::Result;
 use rust_embed::RustEmbed;
 use serde::{Deserialize, Serialize};
 
+use once_cell::sync::Lazy;
 use tera::Context;
 use tera::Tera;
-use once_cell::sync::Lazy;
 
 #[derive(RustEmbed)]
 #[folder = "templates/"]
@@ -16,15 +16,18 @@ struct Asset;
 
 static TEMPLATES: Lazy<Tera> = Lazy::new(|| {
     let mut tera = Tera::default();
-    let template_list = ["resume.tex.tmpl","resume.md.tmpl"];
+    let template_list = ["resume.tex.tmpl", "resume.md.tmpl"];
     for each_temp in template_list {
         if let Some(content) = Asset::get(each_temp) {
-            tera.add_raw_template(each_temp, std::str::from_utf8(content.data.as_ref()).expect("Internal Error (See templates)")).expect("Tera error adding templates");
+            tera.add_raw_template(
+                each_temp,
+                std::str::from_utf8(content.data.as_ref()).expect("Internal Error (See templates)"),
+            )
+            .expect("Tera error adding templates");
         }
     }
     tera
 });
-
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct CVStruct {
@@ -105,6 +108,11 @@ impl CVStruct {
     pub fn from_toml_file(filename: &impl AsRef<Path>) -> Result<CVStruct> {
         let data: String = fs::read_to_string(filename)?;
         let cv: CVStruct = toml::from_str(&data)?;
+        Ok(cv)
+    }
+
+    pub fn from_toml(content: &str) -> Result<CVStruct> {
+        let cv: CVStruct = toml::from_str(&content)?;
         Ok(cv)
     }
 

@@ -7,12 +7,20 @@ use crate::cvstruct::CVStruct;
 
 use cvstruct::OutputType;
 
+use std::io::{self, Read};
+
 fn main() -> anyhow::Result<()> {
     let args = flags::Args::parse();
 
-    let cv = match args.from {
-        Some(filepath) => CVStruct::from_toml_file(&filepath)?,
-        None => CVStruct::get_dummy(),
+    let cv = if args.stdin {
+        let mut stdinput = String::new();
+        io::stdin().read_to_string(&mut stdinput)?;
+        CVStruct::from_toml(&stdinput)?
+    } else {
+        match args.from {
+            Some(filepath) => CVStruct::from_toml_file(&filepath)?,
+            None => CVStruct::get_dummy(),
+        }
     };
 
     let out_type = match args.to.to_owned() {

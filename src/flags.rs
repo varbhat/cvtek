@@ -13,8 +13,9 @@ pub struct Args {
     #[arg(short, long)]
     pub out: bool,
 
-    // #[arg(long="in")]
-    // pub stdin: bool,
+    #[arg(short = 'i', long = "in")]
+    pub stdin: bool,
+
     #[arg(long)]
     pub template: Option<String>,
 
