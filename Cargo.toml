@@ -10,7 +10,7 @@ anyhow = "1.0.68"
 clap = { version = "4.0.29", features = ["derive"] }
 indexmap = { version = "1.9.2", features = ["serde"] }
 once_cell = "1.17.0"
-rust-embed = "6.4.2"
+rust-embed = { version = "6.4.2", features = ["include-exclude", "compression"] }
 serde = { version = "1.0.151", features = ["derive"] }
 tera = { version="1.17.1", features = ["preserve_order"]}
 toml = { version = "0.5.10", features = ["preserve_order"]}

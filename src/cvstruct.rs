@@ -12,6 +12,7 @@ use tera::Tera;
 
 #[derive(RustEmbed)]
 #[folder = "templates/"]
+#[include = "*.tmpl"]
 struct Asset;
 
 static TEMPLATES: Lazy<Tera> = Lazy::new(|| {
