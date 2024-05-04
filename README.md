@@ -49,7 +49,7 @@ Frameworks = "ABC, DEF, GHI, JKL, whatever"
 
 ```
 
-Resume Produced by `cvtek` will look like this:
+Resume Produced by `cvtek` will look like this (See `cvtek` generated [`democv.pdf` here](assets/democv.pdf)):
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/varbhat/cvtek/main/assets/democv.png" alt="cvtek demo resume" width=800 height=1200 />
