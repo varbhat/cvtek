@@ -48,6 +48,12 @@ Technologies = "A, B, C, D, E, F, G, H, whatever"
 Frameworks = "ABC, DEF, GHI, JKL, whatever"
 
 ```
+
+Resume Produced by `cvtek` will look like this:
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/varbhat/cvtek/main/assets/democv.png" alt="cvtek demo resume" width=800 height=1200 />
+</p>
 <hr>
 
 ## Usage
