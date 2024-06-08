@@ -61,6 +61,9 @@ Resume Produced by `cvtek` will look like this (See `cvtek` generated [`democv.p
   ```bash
   cargo install --git https://github.com/varbhat/cvtek
   ```
+
+ `cvtek` is also available in [AUR](https://aur.archlinux.org/packages/cvtek-git) as `cvtek-git` and is maintained by [orhun](https://github.com/orhun).
+  
 - Type `cvtek -t resume.toml` to generate dummy `resume.toml`
 - Modify `resume.toml` to your likening
 - Compile your `resume.toml` using:
