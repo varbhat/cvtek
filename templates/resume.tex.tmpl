@@ -130,7 +130,7 @@
 {% raw %}
 \ResumeHeader
 {\textbf{\href{https://github.com/{% endraw %}{{cvstruct.header.github_username}}{% raw %}}{\Large\color{black}{{% endraw %}{{ cvstruct.header.full_name }}{% raw %}}}}}
-{\href{mailto:{% endraw %}{{ cvstruct.header.email_addr }}{% raw %}}{{% endraw %}{{ cvstruct.header.email_addr }}{% raw %}}}
+{\href{mailto:{% endraw %}{{ cvstruct.header.email_addr }}{% raw %}}{{% endraw %}{{ cvstruct.header.email_addr | replace(from="_", to="\_") }}{% raw %}}}
 {\href{https://github.com/{% endraw %}{{ cvstruct.header.github_username}}{% raw %}}{github.com/{% endraw %}{{ cvstruct.header.github_username}}{% raw %}}} 
 {\href{https://linkedin.com/in/{% endraw %}{{ cvstruct.header.linkedin_username }}{% raw %}}{linkedin.com/in/{% endraw %}{{ cvstruct.header.linkedin_username }}{% raw %}}} 
 {{{% endraw %}{{ cvstruct.header.location }}{% raw %}}}
